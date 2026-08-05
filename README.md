@@ -27,7 +27,17 @@ La división de trabajo: **la IA propone direcciones y pone disciplina; el human
 
 ## Instalación
 
-### Opción 1 — Global (todos tus proyectos)
+### Opción 1 — skills.sh CLI (recomendada)
+
+La skill está publicada en este repo y se instala con la herramienta [skills.sh](https://skills.sh) (no requiere instalación previa, corre con npx):
+
+```bash
+npx skills add https://github.com/luisplata/unity-gamejam --skill unity-rapid-prototyping
+```
+
+El CLI detecta el `SKILL.md` en `skills/unity-rapid-prototyping/` y lo configura para tu agente. Para desactivar telemetría: `DISABLE_TELEMETRY=1`.
+
+### Opción 2 — Global (todos tus proyectos)
 
 ```bash
 # Copiá la skill a la carpeta de skills de OpenCode (usuario)
@@ -37,7 +47,7 @@ cp -r skills/unity-rapid-prototyping/* ~/.config/opencode/skills/unity-rapid-pro
 
 Queda disponible automáticamente en todos tus proyectos Unity.
 
-### Opción 2 — Por proyecto (solo un juego)
+### Opción 3 — Por proyecto (solo un juego)
 
 ```bash
 # Copiá la skill al proyecto donde la vayas a usar
