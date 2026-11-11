@@ -97,23 +97,24 @@ UR se comporta **exactamente como antes**: sin envelope, sin error, sin warning,
 
 ## Apéndice — chequeo de consistencia
 
-Corré esto parado en la raíz del repo. Es el único CI que tenemos:
-
 ```bash
-# A. el trigger de CF no compite con el de UR — esperá 0
-awk 'NR>1 && /^---$/{exit} NR>1' skills/creative-facilitator/SKILL.md \
-  | grep -inE 'game jam|core loop|prototype|prototipado|unity'
+# Corré esto parado en la raíz del repo. Es el único CI que tenemos.
+awk 'NR>1 && /^---$/{exit} NR>1' skills/creative-facilitator/SKILL.md | grep -inE 'game jam|core loop|prototype|prototipado|unity'  # A. trigger de CF aislado — esperá 0
 
-# B. UR conserva el trigger de jam — esperá game jam, core loop, prototipado
-grep -nE 'game jam|core loop|prototipado' skills/unity-rapid-prototyping/SKILL.md
+grep -nE 'game jam|core loop|prototipado' skills/unity-rapid-prototyping/SKILL.md  # B. UR conserva el trigger de jam — esperá los tres términos
 
-# C. vocabulario compartido, 5/5 en los dos archivos
-for t in challenge divergence convergence provenance verdict; do
-  printf '%s UR=%s CF=%s\n' "$t" \
-    "$(grep -ci "$t" skills/unity-rapid-prototyping/SKILL.md)" \
-    "$(grep -ci "$t" skills/creative-facilitator/SKILL.md)"
-done
+for t in challenge divergence convergence provenance verdict; do grep -ci "$t" skills/*/SKILL.md; done  # C. vocabulario compartido — 5/5 en los dos
 
-# D. la tabla de propiedad es la misma copia en los tres lugares — esperá 12
-for f in skills/creative-facilitator/SKILL.md skills/unity-rapid-prototyping/SKILL.md docs/pairing.md; do sed -n '/^| Decision | Owner | Rule |/,/^| State announcement/p' "$f"; done | sort -u | wc -l
+for f in skills/creative-facilitator/SKILL.md skills/unity-rapid-prototyping/SKILL.md docs/pairing.md; do sed -n '/^| Decision | Owner | Rule |/,/^| State announcement/p' "$f"; done | sort -u | wc -l  # D. misma tabla en los tres — esperá 12
+
+grep -nE 'mode[:=] *"?(divergence|deepening|inspection|recovery)' skills/*/SKILL.md  # E. sin modos viejos — esperá 0
+
+grep -cE 'challenge|knowns|prior_attempts|max_minutes' skills/*/SKILL.md docs/pairing.md  # F. los dos envelopes en los tres — ≥1 por archivo
+grep -cE 'open_questions|suggested_next|clusters' skills/*/SKILL.md docs/pairing.md
+
+git diff main --numstat -- skills/unity-rapid-prototyping/SKILL.md  # G. UR siguió aditivo — esperá 35 0
+
+git diff main --stat -- examples/ docs/philosophy.md; git diff main --name-only -- docs/workflow.md  # H. superficies intactas — esperá vacío
+
+grep -c '^## [0-9]' docs/prompts.md; grep -cE '^\| (Brainstorming|Forced Combination|Lotus Blossom|Six Thinking Hats)' skills/creative-facilitator/SKILL.md; grep -c '^## ' skills/creative-facilitator/templates/session-record.md; grep -c 'npx skills add' README.md; grep -c 'mkdir -p' README.md  # I. conteos estructurales — esperá 7 4 10 2 4
 ```

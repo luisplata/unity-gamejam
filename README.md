@@ -38,7 +38,7 @@ La división de trabajo: **la IA propone direcciones y pone disciplina; el human
 
 **Las dos juntas son el flujo completo; cada una sirve sola.** Si instalás solo `unity-rapid-prototyping`, el flujo es exactamente el de siempre: no hay error, no hay warning, no hay nag para instalar nada.
 
-**El costo aceptado de instalar una sola:** sin `creative-facilitator` no tenés el pase de Forced Combination cuando las 3-5 direcciones fallan el criterio Standout. Ese pase es lo único que agrega el par. Nada más cambia.
+**El costo aceptado de instalar una sola:** sin `creative-facilitator` generás las 3-5 direcciones vos, inline, como siempre, y cuando todas fallan el criterio Standout no tenés el pase de Forced Combination que intenta rescatarlas. Con las dos instaladas, el par cambia esa generación —los clusters vuelven como candidatas— y suma ese pase. Nada más cambia.
 
 ## Instalación
 
@@ -103,6 +103,9 @@ Si falta alguno, la skill frena y te da el comando de instalación. `creative-fa
 │   │   └── SKILL.md
 │   └── creative-facilitator/       # Diverge: bloque con tiempo, sin juzgar
 │       ├── SKILL.md
+│       ├── references/
+│       │   ├── brainstorming.md          # El procedimiento de Brainstorming
+│       │   └── forced-combination.md     # El procedimiento de Forced Combination
 │       └── templates/
 │           └── session-record.md   # El record completo del modo workshop
 ├── examples/                       # Referencias por género: gate aplicado
