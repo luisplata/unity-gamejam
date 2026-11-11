@@ -73,6 +73,13 @@ Rules:
 
 Give every direction a one-sentence pitch: genre + the exact 10-second action the player does + how it interprets the theme.
 
+**With `creative-facilitator` installed**, invoke it by name (never through trigger matching), open a `diverge` block and announce mode, minutes and goal.
+Send `challenge`, `knowns`, `prior_attempts[]`, `max_minutes: 25` and `mode: diverge`, then present 3–5 directions drawn from the returned `clusters[]` — each traced to a cluster id and its `relation`. Never invent directions inline while CF is available.
+When the block returns, announce it: the mode, and how many clusters came back.
+
+If the pool comes back without usable clusters, group it inline yourself once (3–5 clusters) and never re-open the block.
+**Without CF**, generate inline exactly as the table below does: no envelope, no message, no retry.
+
 | Direction | One-sentence pitch | Theme take (literal / metaphor) |
 |-----------|--------------------|--------------------------------|
 | A | ... | ... |
@@ -90,6 +97,9 @@ Give every direction a one-sentence pitch: genre + the exact 10-second action th
 | Standout | What makes it memorable vs 100 entries with the same theme? | No answer — it's the crowd idea, rethink. |
 | Theme tie | Can you defend the theme connection in one sentence? | Literal ties are safe but crowded; metaphor is riskier but more memorable. |
 
+**Standout recovery.** If all 3–5 directions fail Standout and `creative-facilitator` is installed, run exactly one `recover` pass before killing the batch, then decide — one pass per batch, never two.
+CF output is not a pass: it is a new candidate that re-enters this table, and a combination only counts if it changes the mechanism — new art or theme wording does not.
+
 ### Verdicts
 
 - **BUILD NOW** — passes everything: start the mini-prototype in the first hour.
@@ -101,6 +111,29 @@ Give every direction a one-sentence pitch: genre + the exact 10-second action th
 - The first hour of the jam is a MINI-PROTOTYPE of the chosen idea. If it is not fun after that hour, switch to the #2 direction. Do NOT polish it.
 - Do not fall in love with an idea. The validator says NO until an idea survives every criterion.
 - Division of labor: the AI proposes directions and enforces constraints (quantity + discipline); the human owns taste and the final pick. The AI is the strict mentor, NOT the creative brain.
+
+## Handoff → Creative Facilitator
+
+Invoke `creative-facilitator` **by name**, never through trigger matching — UR keeps the jam triggers. When it is not installed, behave exactly as today: no envelope, no error, no warning loop, no install nag, no separate fallback path — the normal inline path is the whole flow.
+
+Shared vocabulary: `challenge` (the confirmed problem in one sentence) · `divergence` (timed, judgment-free generation) · `convergence` (criteria plus verdict) · `provenance` (user/ai label, never rewritten) · `verdict` (BUILD NOW / VALIDATE FIRST / CUT — yours alone).
+
+Sequence: preferences → `diverge` (CF, `max_minutes`) → envelope → the six criteria → verdict. Announce every entry and exit with mode, minutes and goal; CF never switches state and never emits a verdict. Six Thinking Hats may move a CUT only with new evidence — a fact, a constraint, or a test — and UR re-gates.
+
+| Decision | Owner | Rule |
+|---|---|---|
+| The 5 fixed preference questions | **UR** | CF reads `knowns`, never re-asks |
+| Elastic questions (≤2) | **CF** | UR never asks them |
+| Clock / `max_minutes` | **UR** | CF respects it, never extends it |
+| Method choice | **CF** | recommend + wait; UR changes state, not method |
+| Evaluation criteria | **UR** | CF never applies them |
+| Verdict | **UR** | CF never emits one |
+| Provenance assignment | **CF** | label at creation |
+| Provenance preservation | **UR** | neither side re-labels what it received |
+| Plan / backlog / tasks | **UR**, only after a verdict | CF never produces one |
+| State announcement | **UR** | CF never switches mode itself |
+
+UR→CF sends `challenge`, `knowns` (`genre_strength`, `jam_hours`, `team_size`, `csharp_level`, `must_haves`, `must_avoids`), `prior_attempts[]`, `max_minutes` (20–40) and `mode` (`diverge` / `inspect` / `recover`); CF returns `pool[]`, `clusters[]` (3–5), `connections[]`, `open_questions[]` and `suggested_next` — `verdict` is not among them.
 
 ## Critical Patterns
 
@@ -132,6 +165,8 @@ A feature that fails the gate is not wrong — it is NOT NOW. Record it and prot
 ## Unity MCP Workflow
 
 0. Idea validated first: ask the user's preferences (genre, time, team, skill, must-haves) → run the Idea Validator with theme + preferences → ONE direction with a core loop stated in one sentence. Do NOT open the editor before this exists.
+   - Optional `[DIVERGE]` block between the preferences and the Validator, only if `creative-facilitator` is installed: `mode: diverge`, 25 minutes by default, announced before it opens.
+   - Its `clusters[]` become the 3–5 directions the Validator rules on; without CF, step 0 is exactly today's flow and no block is announced.
 1. Validate prerequisites first (see Prerequisites section): editor connected via MCP + required packages installed. Then check `read_console` for compile errors — never build on a broken compile.
 2. Create or modify scripts, then `read_console` immediately to catch compilation errors before proceeding.
 3. Validate visual/gameplay changes with play mode (`manage_editor` play/pause/stop) + screenshots; validate logic with `run_tests` (EditMode/PlayMode).

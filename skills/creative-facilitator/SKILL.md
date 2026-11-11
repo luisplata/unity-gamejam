@@ -126,6 +126,8 @@ Write prose in the user's current language. Keep the four method names, the thre
 
 This skill runs alone or as a called block. The caller owns the state machine, the clock, the announcements, and the verdict. Read the request's schema as given and never require a field it did not send.
 
+The caller may send `challenge`, `knowns`, `prior_attempts[]`, `max_minutes` and `mode`; take what arrives and never demand the rest — `prior_attempts[]` is a list of dead directions with their causes, not a resurrection request.
+
 When a field you expect never arrives, degrade the data and not the block: state the assumption, keep generating, and record it in `open_questions[]` — never refuse the request and never ask the caller for the missing field.
 
 Shared vocabulary: `challenge` (the confirmed problem in one sentence) · `divergence` (timed, judgment-free generation) · `convergence` (criteria plus verdict) · `provenance` (user/ai label, never rewritten) · `verdict` (the caller's decision, never yours).

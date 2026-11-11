@@ -29,6 +29,22 @@ Templates para sacarle el máximo al agente con la skill `unity-rapid-prototypin
 > Lista de features candidatas: [lista].
 > Clasificalas por prioridad contra el core loop y marcalas como AHORA / NO AHORA / NUNCA. Justificá con el gate.
 
+## 6. Abrir el bloque de divergencia (UR → CF)
+
+> Vamos a divergir antes de validar. Usá creative-facilitator en modo `diverge`, 25 minutos.
+> challenge: [tema en una oración]
+> knowns: genre_strength [género], jam_hours [horas], team_size [cuántos], csharp_level [beginner/comfortable/strong], must_haves [lista], must_avoids [lista]
+> prior_attempts: [direcciones ya descartadas y por qué, o vacío]
+> max_minutes: 25
+> mode: diverge
+> Devolveme el envelope con pool, clusters, connections, open_questions y suggested_next. No me digas cuál elegir.
+
+## 7. Devolver el pool al Validator (CF → UR)
+
+> Acá está el envelope que volvió del bloque: [pegá el bloque entero, desde `envelope: cf-to-ur v1`].
+> Tratá cada cluster como una dirección candidata: pitch de una oración, acción de 10 segundos y lectura del tema.
+> Corré los 6 criterios sobre cada una y emití BUILD NOW / VALIDATE FIRST / CUT por dirección. El veredicto es tuyo, no del pool.
+
 ## Reglas de uso
 
 - Pedí el veredicto del gate por escrito: fuerza al agente a decidir antes de codear
