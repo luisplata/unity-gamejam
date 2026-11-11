@@ -6,7 +6,7 @@ description: >
   before anyone commits. Runs a timed, judgment-free block and hands the raw
   material back to the caller. It never ranks, scores, plans, or decides.
   Trigger: brainstorm, ideation, creative block, stuck on an idea, explore a
-  problem, explore options, generate alternatives, evaluate an idea, divergir,
+  problem, explore options, generate alternatives, widen an idea, divergir,
   lluvia de ideas.
 license: Apache-2.0
 metadata:
@@ -88,7 +88,7 @@ The mode arrives with the request. It is not yours to choose, and you never swit
 
 `quick` is the default and needs no keyword. `workshop` only on request.
 
-- **`quick`** — at most 10 non-empty lines: the clusters, the strongest connections, `open_questions` if any, and one `suggested_next` sentence. Name `workshop` at most once, as an offer.
+- **`quick`** — at most 10 non-empty lines: the pool, the clusters, the strongest connections, `open_questions` if any, and one `suggested_next` sentence. Name `workshop` at most once, as an offer.
 - **`workshop`** — the full record from `templates/session-record.md`.
 
 ## Session record
@@ -126,7 +126,11 @@ Write prose in the user's current language. Keep the four method names, the thre
 
 This skill runs alone or as a called block. The caller owns the state machine, the clock, the announcements, and the verdict. Read the request's schema as given and never require a field it did not send.
 
+When a field you expect never arrives, degrade the data and not the block: state the assumption, keep generating, and record it in `open_questions[]` — never refuse the request and never ask the caller for the missing field.
+
 Shared vocabulary: `challenge` (the confirmed problem in one sentence) · `divergence` (timed, judgment-free generation) · `convergence` (criteria plus verdict) · `provenance` (user/ai label, never rewritten) · `verdict` (the caller's decision, never yours).
+
+`UR` is the invoking evaluator — standalone, that is the user.
 
 ### Who owns what
 
@@ -159,7 +163,7 @@ Keys are never omitted: an empty value is `[]`. `suggested_next` is not a plan �
 
 **CF never emits a verdict.** There is no `verdict` key in this envelope and no sentence that ranks, selects, or disqualifies. That absence is the contract, not an oversight.
 
-## Example: a quick close
+### Example: a quick close
 
 ```text
 envelope: cf-to-ur v1
